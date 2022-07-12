@@ -39,3 +39,6 @@ function submitPost(e){
         .then(() => e.target.reset())
         .catch(console.warn)
 };
+
+
+//sends user to results page

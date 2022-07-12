@@ -10,7 +10,9 @@
 <body>
 
     <div class="create-post">
-    <form id="new-post-form">
+        <img src="panda.png" alt="PandaBlogger" width="20%" height="20%" class="pandaImg">
+
+    <form id="new-post-form" class="form">
             <label for="title">title</label>
             <input type="text" id="title" />
 <br>
@@ -20,10 +22,11 @@
             <label for="description">description</label>
             <input type="text" id="description" />
 <br>
-            <input type="submit" id="submit" value="Add post">
+
+            <input type="submit" id="submit" value="Add post" onclick="window.open('http://127.0.0.1:5502/client/results.html'); return false">
+
         </form>
     </div>
-
 
 
 

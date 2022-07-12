@@ -1,14 +1,14 @@
-  
+
 version: '3'
 services:
   server:
     image: node:12.18.4
     working_dir: /code
-    ports: 
+    ports:
       - 3000:3000
-    environment: 
+    environment:
       - DB_NAME=posts
-      - DB_CONNECTION=mongodb://futureproof:shelterpass@db:27017
+      - DB_CONNECTION=mongodb://vinEll:vinEllPass@db:27017
     depends_on:
       - db
     volumes:
@@ -22,9 +22,9 @@ services:
     volumes:
       - "dbdata:/var/lib/mongodb/data"
       - "./db/posts.js:/docker-entrypoint-initdb.d/posts.js:ro"
-    environment: 
-      - MONGO_INITDB_ROOT_USERNAME=futureproof
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=vinEll
       - MONGO_INITDB_DATABASE=posts
-      - MONGO_INITDB_ROOT_PASSWORD=shelterpass
+      - MONGO_INITDB_ROOT_PASSWORD=vinEllPass
 volumes:
   dbdata:

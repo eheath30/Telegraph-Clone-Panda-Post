@@ -10,6 +10,10 @@ body{
 
 
     /* create styles */
+    .create-post {
+      display: flex; align-items: center; flex-direction: column;
+    }
+
     .create-post form{
         max-width: 400px;
         margin: 0 auto;
@@ -36,4 +40,11 @@ body{
         border: 0;
         font-size: 1.2em;
         cursor: pointer;
+      }
+
+      .form {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
       }
