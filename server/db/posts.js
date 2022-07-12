@@ -1,4 +1,4 @@
-const db = connect("mongodb://localhost:27017/posts")
+const db = connect("mongodb://localhost:27017/userposts")
 
 
 db.posts.drop()

@@ -29,6 +29,7 @@ class Post {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
+                // console.log(db)
                 let postData = await db.collection('posts').find({ _id: ObjectId(id) }).toArray()
                 let post = new Post({...postData[0], id: postData[0]._id});
                 resolve (post);
@@ -38,22 +39,44 @@ class Post {
         });
     }
 
-    static create(title, alias, description){
+    static create (title, alias, description) {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                let postData = await db.collection('posts').insertOne({ title, alias, description })
-                // console.log(postData);
-                // console.log(postData.ops[0]);
-                let newPost = new Post(postData.ops[0]);
-                resolve (newPost);
-            } catch (err) {
-                reject('Error creating post');
+                let postData = await db.collection('posts').insertOne({title, alias, description})
+                console.log(postData)
+                let newPost = new Post(postData.ops[0])
+                resolve(newPost)
+            } catch(err) {
+                reject('Error creating post')
             }
-        });
+        })
     }
 
+    update() {
+            return new Promise (async (resolve, reject) => {
+                try {
+                    const db = await init();
+                    let updatedPostData = await db.collection('posts').findOneAndUpdate({ _id: ObjectId(this.id) }, { $inc: { age: 1 } }, { returnOriginal: false })
+                    let updatedPost = new Dog(updatedPostData.value);
+                    resolve (updatedPost);
+                } catch (err) {
+                    reject('Error updating post');
+                }
+            });
+        }
 
+    destroy(){
+            return new Promise(async(resolve, reject) => {
+                try {
+                    const db = await init();
+                    await db.collection('posts').deleteOne({ _id: ObjectId(this.id) })
+                    resolve('Post was deleted')
+                } catch (err) {
+                    reject('Dog could not be deleted')
+                }
+            })
+        }
 }
 
 module.exports = Post;

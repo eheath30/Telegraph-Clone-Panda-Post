@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DB_NAME=posts
+      - DB_NAME=userposts
       - DB_CONNECTION=mongodb://vinEll:vinEllPass@db:27017
     depends_on:
       - db
@@ -24,7 +24,7 @@ services:
       - "./db/posts.js:/docker-entrypoint-initdb.d/posts.js:ro"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=vinEll
-      - MONGO_INITDB_DATABASE=posts
+      - MONGO_INITDB_DATABASE=userposts
       - MONGO_INITDB_ROOT_PASSWORD=vinEllPass
 volumes:
   dbdata:
