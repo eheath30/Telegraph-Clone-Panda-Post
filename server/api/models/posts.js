@@ -13,7 +13,7 @@ class Post {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init()
-                console.log(db);
+                // console.log(db);
                 const postsData = await db.collection('posts').find().toArray()
                 const posts = postsData.map(p => new Post({ ...p, id: p._id }))
                 resolve(posts);
@@ -41,8 +41,10 @@ class Post {
     static create(title, alias, description){
         return new Promise (async (resolve, reject) => {
             try {
+                console.log("entering create function")
                 const db = await init();
-                let postData = await db.collection('dogs').insertOne({ title, alias, description })
+                let postData = await db.collection('posts').insertOne({ title, alias, description })
+                console.log(postData);
                 let newPost = new Post(postData.ops[0]);
                 resolve (newPost);
             } catch (err) {
