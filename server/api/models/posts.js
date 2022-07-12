@@ -43,8 +43,8 @@ class Post {
             try {
                 const db = await init();
                 let postData = await db.collection('posts').insertOne({ title, alias, description })
-                console.log(postData);
-                console.log(postData.ops[0]);
+                // console.log(postData);
+                // console.log(postData.ops[0]);
                 let newPost = new Post(postData.ops[0]);
                 resolve (newPost);
             } catch (err) {
