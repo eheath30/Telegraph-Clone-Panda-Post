@@ -20,10 +20,11 @@ function getAllPosts(){
 // create new post
 function submitPost(e){
     e.preventDefault();
+    console.log(e)
     const postData = {
-        name: e.target.title.value,
-        age: e.target.name.value,
-        age: e.target.description.value
+        title: e.target.title.value,
+        alias: e.target.alias.value,
+        description: e.target.description.value
     };
 
     const options = {

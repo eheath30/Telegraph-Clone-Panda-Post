@@ -4,8 +4,8 @@ const { ObjectId } = require('mongodb')
 class Post {
     constructor(data){
         this.id = data.id,
-        this.alias = data.alias,
         this.title = data.title,
+        this.alias = data.alias,
         this.description = data.description
     }
 
@@ -31,9 +31,9 @@ class Post {
                 const db = await init();
                 let postData = await db.collection('posts').find({ _id: ObjectId(id) }).toArray()
                 let post = new Post({...postData[0], id: postData[0]._id});
-                resolve (dog);
+                resolve (post);
             } catch (err) {
-                reject('Dog not found');
+                reject('Post not found');
             }
         });
     }
@@ -41,10 +41,10 @@ class Post {
     static create(title, alias, description){
         return new Promise (async (resolve, reject) => {
             try {
-                console.log("entering create function")
                 const db = await init();
                 let postData = await db.collection('posts').insertOne({ title, alias, description })
                 console.log(postData);
+                console.log(postData.ops[0]);
                 let newPost = new Post(postData.ops[0]);
                 resolve (newPost);
             } catch (err) {
