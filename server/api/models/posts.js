@@ -23,6 +23,35 @@ class Post {
             }
         })
     }
+
+
+    static findById (id) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                const db = await init();
+                let postData = await db.collection('posts').find({ _id: ObjectId(id) }).toArray()
+                let post = new Post({...postData[0], id: postData[0]._id});
+                resolve (dog);
+            } catch (err) {
+                reject('Dog not found');
+            }
+        });
+    }
+
+    static create(title, alias, description){
+        return new Promise (async (resolve, reject) => {
+            try {
+                const db = await init();
+                let postData = await db.collection('dogs').insertOne({ title, alias, description })
+                let newPost = new Post(postData.ops[0]);
+                resolve (newPost);
+            } catch (err) {
+                reject('Error creating post');
+            }
+        });
+    }
+
+
 }
 
 module.exports = Post;
