@@ -53,12 +53,15 @@ class Post {
         })
     }
 
-    update() {
+    update(title, alias, description) {
             return new Promise (async (resolve, reject) => {
                 try {
                     const db = await init();
-                    let updatedPostData = await db.collection('posts').findOneAndUpdate({ _id: ObjectId(this.id) }, { $inc: { age: 1 } }, { returnOriginal: false })
-                    let updatedPost = new Dog(updatedPostData.value);
+                    let updatedPostData = await db.collection('posts').findByIdAndUpdate({ _id: ObjectId(this.id) }, { title: title, alias: alias, description: description })
+                    console.log("***************")
+                    console.log(updatedPostData)
+                    console.log("***************")
+                    let updatedPost = new Post(updatedPostData);
                     resolve (updatedPost);
                 } catch (err) {
                     reject('Error updating post');

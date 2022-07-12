@@ -33,12 +33,13 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
-        const updatedPost = await Post.update()
-        res.json({post: updatedPost})
+        // const updatedPost = await Post.update()
+        res.json({post})
     } catch(err) {
+        console.log(post)
         res.status(500).json({err})
     }
 })

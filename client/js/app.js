@@ -3,8 +3,12 @@
 const form = document.querySelector('#new-post-form');
 const postList = document.querySelector('table');
 
+
 //bind event listeners
 form.addEventListener('submit', submitPost);
+// viewPostButton.addEventListener('click', () => {
+//     document.location.href = "./results.html"
+// })
 
 //fetch all posts on /posts page load
 getAllPosts();
@@ -35,20 +39,10 @@ function submitPost(e){
 
     fetch('http://localhost:3000/posts', options)
         .then(r => r.json())
-        .then(appendPost)
-        .then(() => e.target.reset())
         .catch(console.warn)
+
+        document.location.href = "./results.html"
 };
 
 
 
-// helpers
-functiPosts(data){
-    data.posts.forEach(appendPost);
-};
-
-function appendPost(postData){
-    const newRow = document.createElement('tr');
-    const postLi = formatPostTr(postData, newRow)
-    postList.append(newRow);
-};
