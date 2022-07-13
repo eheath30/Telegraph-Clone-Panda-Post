@@ -34,8 +34,8 @@ Below are the routes available for use with the right usage:
 - - styles: contains front-end stylesheets
 - server: contains the docker-compose yaml file required for server startup
 - - api: contains nodejs server and dbConfig files
--   - controllers: Contains expressjs routes for requests.
--   - models: contains Post model
+- - - controllers: Contains expressjs routes for requests.
+- - - models: contains Post model
 - - db: contains content for database seeding.
 
 
