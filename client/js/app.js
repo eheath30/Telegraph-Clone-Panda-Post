@@ -6,43 +6,51 @@ const postList = document.querySelector('table');
 
 //bind event listeners
 form.addEventListener('submit', submitPost);
-// viewPostButton.addEventListener('click', () => {
-//     document.location.href = "./results.html"
-// })
-
-//fetch all posts on /posts page load
-getAllPosts();
-
-// index
-function getAllPosts(){
-    fetch('http://localhost:3000/posts')
-        .then(r => r.json())
-        .then(appendPosts)
-        .catch(console.warn)
-};
 
 // create new post
 function submitPost(e){
     e.preventDefault();
     console.log(e)
-    const postData = {
-        title: e.target.title.value,
-        alias: e.target.alias.value,
-        description: e.target.description.value
-    };
 
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(postData),
-        headers: { "Content-Type": "application/json" }
-    };
+    const title = e.target.title.value
+    const alias = e.target.alias.value
+    const description = e.target.description.value
 
-    fetch('http://localhost:3000/posts', options)
-        .then(r => r.json())
-        .catch(console.warn)
+    if(title == "" || alias == "" || description == ""){
+        submissionError();
+    } else {
+        const postData = {
+            title: e.target.title.value,
+            alias: e.target.alias.value,
+            description: e.target.description.value
+        };
 
-        document.location.href = "./results.html"
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(postData),
+            headers: { "Content-Type": "application/json" }
+        };
+
+        fetch('http://localhost:3000/posts', options)
+            .then(r => r.json())
+            .catch(console.warn)
+
+            document.location.href = "./results.html"
+    }
 };
+
+function submissionError(){
+
+    let errorNote = document.getElementById('errornote')
+    console.log(errorNote)
+    if(errorNote == null){
+        errorNote = document.createElement('p')
+        errorNote.textContent = "all fields require input"
+        errorNote.style.color = 'red'
+        errorNote.setAttribute('id', 'errornote')
+        form.appendChild(errorNote)
+    } 
+}
 
 
 
