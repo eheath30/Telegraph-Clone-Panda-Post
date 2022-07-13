@@ -6,7 +6,8 @@ class Post {
         this.id = data.id,
         this.title = data.title,
         this.alias = data.alias,
-        this.description = data.description
+        this.description = data.description,
+        this.date = data.date
     }
 
     static get all() {
@@ -40,11 +41,11 @@ class Post {
         });
     }
 
-    static create (title, alias, description) {
+    static create (title, alias, description, date) {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                let postData = await db.collection('posts').insertOne({title, alias, description})
+                let postData = await db.collection('posts').insertOne({title, alias, description, date})
                 console.log(postData)
                 let newPost = new Post(postData.ops[0])
                 resolve(newPost)
