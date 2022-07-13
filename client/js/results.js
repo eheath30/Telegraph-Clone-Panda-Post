@@ -59,9 +59,9 @@ function deletePost(id, section){
 
 function editPost(){
     const options = { 
-        method: 'PATCH',
+        method: 'PUT',
     };
-    fetch(`http://localhost:3000/dogs/${id}`, options)
+    fetch(`http://localhost:3000/posts/${id}`, options)
         .then(r => r.json())
         .then(data => {
             const { post } = data
