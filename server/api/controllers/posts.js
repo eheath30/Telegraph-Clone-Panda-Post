@@ -14,6 +14,16 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    try {
+        const posts = await Post.findById(req.params.id)
+        // console.log(posts)
+        res.json({posts})
+    } catch(err) {
+        res.status(500).json({err})
+    }
+})
+
 router.post('/', async (req, res) => {
     try {
         const post = await Post.create(req.body.title, req.body.alias, req.body.description)
