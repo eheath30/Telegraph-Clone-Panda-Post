@@ -32,6 +32,7 @@ class Post {
                 // console.log(db)
                 let postData = await db.collection('posts').find({ _id: ObjectId(id) }).toArray()
                 let post = new Post({...postData[0], id: postData[0]._id});
+                // console.log(post)
                 resolve (post);
             } catch (err) {
                 reject('Post not found');
@@ -57,12 +58,13 @@ class Post {
             return new Promise (async (resolve, reject) => {
                 try {
                     const db = await init();
-                    let updatedPostData = await db.collection('posts').findByIdAndUpdate({ _id: ObjectId(this.id) }, { title: title, alias: alias, description: description })
                     console.log("***************")
-                    console.log(updatedPostData)
+                    console.log(db)
                     console.log("***************")
-                    let updatedPost = new Post(updatedPostData);
-                    resolve (updatedPost);
+                    // let updatedPostData = await db.collection('posts').findByIdAndUpdate({ _id: ObjectId(this.id) }, { title: title, alias: alias, description: description })
+                    // let updatedPost = new Post(updatedPostData);
+                    // resolve (updatedPost);
+                    resolve(db)
                 } catch (err) {
                     reject('Error updating post');
                 }

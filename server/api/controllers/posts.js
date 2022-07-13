@@ -36,10 +36,10 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
-        // const updatedPost = await Post.update()
-        res.json({post})
-    } catch(err) {
+        const updatedPost = await Post.update()
         console.log(post)
+        res.json(updatedPost)
+    } catch(err) {
         res.status(500).json({err})
     }
 })
