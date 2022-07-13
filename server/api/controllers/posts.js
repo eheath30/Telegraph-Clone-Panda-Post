@@ -35,8 +35,8 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const dog = await Post.findById(req.params.id)
-        await dog.destroy()
+        const post = await Post.findById(req.params.id)
+        await post.destroy()
         res.status(204).json('Post deleted')
     } catch(err) {
         res.status(500).json({err})
@@ -46,12 +46,23 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
-        const updatedPost = await Post.update()
-        console.log(post)
-        res.json(updatedPost)
-    } catch(err) {
+        await post.update(req.body.title, 
+                            req.body.alias,
+                            req.body.description)
+        res.status(204).json('Post updated')
+    } catch(err){
         res.status(500).json({err})
     }
 })
+// router.put('/:id', async (req, res) => {
+//     try {
+//         const post = await Post.findById(req.params.id)
+//         const updatedPost = await Post.update()
+//         console.log(post)
+//         res.json(updatedPost)
+//     } catch(err) {
+//         res.status(500).json({err})
+//     }
+// })
 
 module.exports = router;
