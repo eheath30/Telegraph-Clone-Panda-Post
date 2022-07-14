@@ -6,7 +6,8 @@ class Post {
         this.id = data.id,
         this.title = data.title,
         this.alias = data.alias,
-        this.description = data.description
+        this.description = data.description,
+        this.date = data.date
     }
 
     static get all() {
@@ -40,11 +41,11 @@ class Post {
         });
     }
 
-    static create (title, alias, description) {
+    static create (title, alias, description, date) {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                let postData = await db.collection('posts').insertOne({title, alias, description})
+                let postData = await db.collection('posts').insertOne({title, alias, description, date})
                 console.log(postData)
                 let newPost = new Post(postData.ops[0])
                 resolve(newPost)
@@ -54,19 +55,36 @@ class Post {
         })
     }
 
-    update(title, alias, description) {
+    // update(title, alias, description) {
+    //         return new Promise (async (resolve, reject) => {
+    //             try {
+    //                 const db = await init();
+    //                 console.log("***************")
+    //                 console.log(db)
+    //                 console.log("***************")
+    //                 // let updatedPostData = await db.collection('posts').findByIdAndUpdate({ _id: ObjectId(this.id) }, { title: title, alias: alias, description: description })
+    //                 // let updatedPost = new Post(updatedPostData);
+    //                 // resolve (updatedPost);
+    //                 resolve(db)
+    //             } catch (err) {
+    //                 reject('Error updating post');
+    //             }
+    //         });
+    //     }
+
+        update(title, alias, description) {
             return new Promise (async (resolve, reject) => {
                 try {
                     const db = await init();
-                    console.log("***************")
-                    console.log(db)
-                    console.log("***************")
-                    // let updatedPostData = await db.collection('posts').findByIdAndUpdate({ _id: ObjectId(this.id) }, { title: title, alias: alias, description: description })
-                    // let updatedPost = new Post(updatedPostData);
-                    // resolve (updatedPost);
-                    resolve(db)
+                    // let updatedPostData = await db.collection('posts').findByIdAndUpdate({ _id: ObjectId(this.id) }, { title: this.title})
+                    console.log(this.id, title, alias, description)
+                    await db.collection('posts').updateOne({ _id: ObjectId(this.id) },
+                                                                { $set: { "title": title, "alias": alias, "description": description } }
+                                                                )
+                    resolve("post was updated");
                 } catch (err) {
-                    reject('Error updating post');
+                    console.log(err)
+                    reject(err, 'Error updating post');
                 }
             });
         }
@@ -78,7 +96,7 @@ class Post {
                     await db.collection('posts').deleteOne({ _id: ObjectId(this.id) })
                     resolve('Post was deleted')
                 } catch (err) {
-                    reject('Dog could not be deleted')
+                    reject('Post could not be deleted')
                 }
             })
         }
