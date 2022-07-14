@@ -24,7 +24,7 @@ async function updateContent(){
         console.log("posts:", posts)
 
         //render post
-        let body = document.querySelector('.body')
+        let body = document.querySelector('#postBody')
         let section = document.createElement('section')
         let title = document.createElement('h1')
         let alias = document.createElement('h2')
@@ -126,7 +126,7 @@ async function getNewPostId(postData){
 
     //render post
     form.remove()
-    let body = document.querySelector('.body')
+    let body = document.querySelector('#postBody')
         let section = document.createElement('section')
         let title = document.createElement('h1')
         let alias = document.createElement('h2')
@@ -184,9 +184,11 @@ function editPost(){
     text.remove()
     let textbox = document.createElement('textarea')
     textbox.value = textValue
+    linebreak = document.createElement("br");
 
     publishBtn.addEventListener('click', publishPost)
     section.appendChild(textbox)
+    section.appendChild(linebreak)
     section.appendChild(publishBtn)
     editBtn.remove()
 
