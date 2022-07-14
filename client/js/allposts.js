@@ -20,6 +20,11 @@ function appendResults(postData){
     const description = postData.description
     const date = postData.date
 
+    //shortened post logic...
+    descriptionArray = description.split(" ")
+    console.log(descriptionArray)
+    let slicedArray = descriptionArray.slice(0,15).join(' ')
+
     const targetDiv = document.createElement('div')
     targetDiv.setAttribute('class', "col-md-6")
 
@@ -31,7 +36,7 @@ function appendResults(postData){
                 <strong class="d-inline-block mb-2 text-primary">${alias}</strong>
                 <h3 class="mb-0">${title}</h3>
                 <div class="mb-1 text-muted">${date}</div>
-                <p class="card-text mb-auto">${description}</p>
+                <p class="card-text mb-auto">${slicedArray}...</p>
                 <a href="#" class="stretched-link">Continue reading</a>
             </div>
             <div class="col-auto d-none d-lg-block">
