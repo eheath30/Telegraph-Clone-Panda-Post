@@ -1,7 +1,1 @@
-const app = require("./server");
-
-// const port = process.env.PORT || 3000;
-
-const port = 3000;
-
-app.listen(port, () => console.log(`Express departed from port ${port}`))
+const app=require("./server"),port=3e3;app.listen(3e3,(()=>console.log("Express departed from port 3000")));
