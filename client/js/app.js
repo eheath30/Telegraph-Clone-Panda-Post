@@ -42,6 +42,7 @@ async function updateContent(){
         date.textContent = posts.date
         editBtn.textContent = "edit post"
         editBtn.setAttribute('id', id)
+        description.setAttribute('class', 'p-description')
 
 
 
@@ -173,7 +174,8 @@ function editPost(){
     let editBtn = document.querySelector('button')
     // console.log(editBtn)
     let section = document.querySelector('section')
-    let text = document.querySelector("p")
+    let text = document.querySelector(".p-description")
+    console.log(text)
     let textValue = document.querySelector("p").textContent
     // console.log(text, textValue)
     let publishBtn = document.createElement('button')
