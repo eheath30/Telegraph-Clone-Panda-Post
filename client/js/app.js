@@ -16,7 +16,7 @@ async function updateContent(){
         //render new post
         form.remove()
         let id = hash.substring(5)
-
+        console.log(id)
         let response = await fetch(`${url}${id}`)
         let data = await response.json();
         let posts = data.posts
@@ -30,6 +30,7 @@ async function updateContent(){
         let alias = document.createElement('h2')
         let description = document.createElement('p')
         let date = document.createElement('h3')
+        let editBtn = document.createElement('button')
 
         console.log(body)
         // body.appendChild(section)
@@ -38,11 +39,16 @@ async function updateContent(){
         alias.textContent = posts.alias
         description.textContent = posts.description
         date.textContent = posts.date
+        editBtn.textContent = "edit post"
+        editBtn.setAttribute('id', id)
+
+        editBtn.addEventListener('click', editPost)
 
         section.appendChild(title)
         section.appendChild(alias)
         section.appendChild(date)
         section.appendChild(description)
+        section.appendChild(editBtn)
         body.appendChild(section)
     }
 
@@ -66,8 +72,6 @@ function submitPost(e){
     const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
     const newDate = dateObj.toLocaleString('default', dateOptions)
     console.log(newDate)
-
-    console.log(typeof newDate)
 
     if(title == "" || alias == "" || description == ""){
         submissionError();
@@ -125,6 +129,7 @@ async function getNewPostId(postData){
         let alias = document.createElement('h2')
         let description = document.createElement('p')
         let date = document.createElement('h3')
+        let editBtn = document.createElement('button')
 
         console.log(body)
         // body.appendChild(section)
@@ -133,11 +138,17 @@ async function getNewPostId(postData){
         alias.textContent = postData.alias
         description.textContent = postData.description
         date.textContent = postData.date
+        editBtn.textContent = "edit post"
+        editBtn.setAttribute('id', postID)
+
+        //editBtn eventlistener
+        editBtn.addEventListener('click', editPost)
 
         section.appendChild(title)
         section.appendChild(alias)
         section.appendChild(date)
         section.appendChild(description)
+        section.appendChild(editBtn)
         body.appendChild(section)
 }
 
@@ -152,6 +163,105 @@ async function getPost(id){
         console.warn(err);
     }
 }
+
+function editPost(){
+
+    console.log("test")
+    let editBtn = document.querySelector('button')
+    // console.log(editBtn)
+    let section = document.querySelector('section')
+    let text = document.querySelector("p")
+    let textValue = document.querySelector("p").textContent
+    // console.log(text, textValue)
+    let publishBtn = document.createElement('button')
+    publishBtn.setAttribute('id', `${editBtn.id}-p`)
+    publishBtn.textContent = "publish post"
+
+    //convert text box to text box input
+    text.remove()
+    let textbox = document.createElement('textarea')
+    textbox.value = textValue
+
+    publishBtn.addEventListener('click', publishPost)
+    section.appendChild(textbox)
+    section.appendChild(publishBtn)
+    editBtn.remove()
+
+    // editBtn.textContent = id
+    // console.log(editBtn)
+
+}
+
+async function publishPost(e){
+    // console.log('test')
+    console.log(e)
+    let publishBtn = document.querySelector('button')
+    let publishBtnId = publishBtn.id
+    let id = publishBtnId.slice(0,publishBtnId.indexOf('-'))
+    const dateObj = new Date();
+    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    const newDate = dateObj.toLocaleString('default', dateOptions)
+
+    const postData = {
+        title: e.target.parentNode.childNodes[0].textContent,
+        alias: e.target.parentNode.childNodes[1].textContent,
+        description: e.target.parentNode.childNodes[3].value,
+        date: newDate
+    };
+
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(postData),
+        headers: { "Content-Type": "application/json" }
+    };
+
+    fetch(`http://localhost:3000/posts/${id}`, options)
+            .then(r => r.json())
+            .then(renderEditedPost(postData))
+            .catch(console.warn)
+
+    console.log(id, postData)
+
+}
+
+function renderEditedPost(postData){
+
+    let section = document.querySelector('section')
+    let publishBtn = document.querySelector('button')
+    publishBtn.remove()
+    let textarea = document.querySelector('textarea')
+    textarea.remove()
+    let text = document.createElement('p')
+
+    let editBtn = document.createElement('button')
+    editBtn.textContent = "edit post"
+    editBtn.setAttribute('id', `${publishBtn.id}`)
+    editBtn.addEventListener('click', editPost)
+    let deleteBtn = document.createElement('input')
+    // deleteBtn.setAttribute('type', "button")
+    // deleteBtn.value = "delete post"
+    // deleteBtn.addEventListener('click', deletePost)
+    text.textContent = postData.description
+
+    //append to section
+
+    section.appendChild(text)
+    section.appendChild(editBtn)
+
+
+    
+}
+
+
+// function deletePost(id, section){
+//     console.log('deleting', id)
+//     const options = { 
+//         method: 'DELETE',
+//     };
+//     fetch(`http://localhost:3000/posts/${id}`, options)
+//         .then(section.remove())
+//         .catch(console.warn)
+// }
 
 
 
