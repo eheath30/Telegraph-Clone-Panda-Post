@@ -181,7 +181,7 @@ function editPost(){
     // console.log(text, textValue)
     let publishBtn = document.createElement('button')
     publishBtn.setAttribute('id', `${editBtn.id}-p`)
-    publishBtn.textContent = "publish post"
+    publishBtn.innerHTML = `publish post <i class="fa-solid fa-paper-plane"></i>`
 
     //convert text box to text box input
     text.remove()
@@ -242,7 +242,7 @@ function renderEditedPost(postData){
     let text = document.createElement('p')
 
     let editBtn = document.createElement('button')
-    editBtn.textContent = "edit post"
+    editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
     editBtn.setAttribute('id', `${publishBtn.id}`)
     editBtn.addEventListener('click', editPost)
     let deleteBtn = document.createElement('input')
