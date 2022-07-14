@@ -21,7 +21,7 @@ async function updateContent(){
         let data = await response.json();
         let posts = data.posts
 
-        console.log(posts)
+        console.log("posts:", posts)
         
         //render post
         let body = document.querySelector('.body')
@@ -29,16 +29,19 @@ async function updateContent(){
         let title = document.createElement('h1')
         let alias = document.createElement('h2')
         let description = document.createElement('p')
+        let date = document.createElement('h3')
 
         console.log(body)
         // body.appendChild(section)
 
         title.textContent = posts.title
         alias.textContent = posts.alias
-        description.textContent == posts.description
+        description.textContent = posts.description
+        date.textContent = posts.date
 
         section.appendChild(title)
         section.appendChild(alias)
+        section.appendChild(date)
         section.appendChild(description)
         body.appendChild(section)
     }
@@ -59,6 +62,12 @@ function submitPost(e){
     const title = e.target.title.value
     const alias = e.target.alias.value
     const description = e.target.description.value
+    const dateObj = new Date();
+    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    const newDate = dateObj.toLocaleString('default', dateOptions)
+    console.log(newDate)
+
+    console.log(typeof newDate)
 
     if(title == "" || alias == "" || description == ""){
         submissionError();
@@ -66,7 +75,8 @@ function submitPost(e){
         const postData = {
             title: e.target.title.value,
             alias: e.target.alias.value,
-            description: e.target.description.value
+            description: e.target.description.value,
+            date: newDate
         };
 
         const options = {
@@ -114,16 +124,19 @@ async function getNewPostId(postData){
         let title = document.createElement('h1')
         let alias = document.createElement('h2')
         let description = document.createElement('p')
+        let date = document.createElement('h3')
 
         console.log(body)
         // body.appendChild(section)
 
         title.textContent = postData.title
         alias.textContent = postData.alias
-        description.textContent == postData.description
+        description.textContent = postData.description
+        date.textContent = postData.date
 
         section.appendChild(title)
         section.appendChild(alias)
+        section.appendChild(date)
         section.appendChild(description)
         body.appendChild(section)
 }
