@@ -31,6 +31,7 @@ async function updateContent(){
         let description = document.createElement('p')
         let date = document.createElement('h3')
         let editBtn = document.createElement('button')
+        let deleteBtn = document.createElement('button')
 
         console.log(body)
         // body.appendChild(section)
@@ -43,16 +44,20 @@ async function updateContent(){
         editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', id)
         description.setAttribute('class', 'p-description')
-
+        deleteBtn.textContent = "delete"
+        deleteBtn.setAttribute('id', id)
+        deleteBtn.setAttribute('class', 'deleteBtn')
 
 
         editBtn.addEventListener('click', editPost)
+        deleteBtn.addEventListener('click', deletePost)
 
         section.appendChild(title)
         section.appendChild(alias)
         section.appendChild(date)
         section.appendChild(description)
         section.appendChild(editBtn)
+        section.appendChild(deleteBtn)
         body.appendChild(section)
     }
 
@@ -65,7 +70,7 @@ viewBtn.addEventListener('click', () => {
 })
 
 // create new post
-function submitPost(e){
+async function submitPost(e){
     e.preventDefault();
     console.log(e)
 
@@ -90,15 +95,18 @@ function submitPost(e){
         const options = {
             method: 'POST',
             body: JSON.stringify(postData),
+            // body: postData,
             headers: { "Content-Type": "application/json" }
         };
 
         fetch('http://localhost:3000/posts', options)
             .then(r => r.json())
+            .then(getNewPostId(postData))
+            // .then(r => console.log(r))
             .catch(console.warn)
 
             // window.location.hash = "#post"
-         getNewPostId(postData)
+         
 
     }
 };
@@ -121,8 +129,9 @@ async function getNewPostId(postData){
     let data = await response.json();
     let posts = data.posts
     // console.log(posts[posts.length-1].id)
-    // console.log(posts)
+    console.log(posts)
     let postID = posts[posts.length-1].id
+    console.log(postID)
     window.location.hash = `#post/${postID}`
 
     //render post
@@ -134,7 +143,7 @@ async function getNewPostId(postData){
         let description = document.createElement('p')
         let date = document.createElement('h3')
         let editBtn = document.createElement('button')
-
+        let deleteBtn = document.createElement('button')
         console.log(body)
         // body.appendChild(section)
 
@@ -145,15 +154,21 @@ async function getNewPostId(postData){
         editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', postID)
         description.setAttribute('class', 'p-description')
+        deleteBtn.textContent = "delete"
+        deleteBtn.setAttribute('id', postID)
+        deleteBtn.setAttribute('class', 'deleteBtn')
+        
 
         //editBtn eventlistener
         editBtn.addEventListener('click', editPost)
+        deleteBtn.addEventListener('click', deletePost)
 
         section.appendChild(title)
         section.appendChild(alias)
         section.appendChild(date)
         section.appendChild(description)
         section.appendChild(editBtn)
+        section.appendChild(deleteBtn)
         body.appendChild(section)
 }
 
@@ -245,6 +260,7 @@ function renderEditedPost(postData){
     editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
     editBtn.setAttribute('id', `${publishBtn.id}`)
     editBtn.addEventListener('click', editPost)
+
     let deleteBtn = document.createElement('input')
     // deleteBtn.setAttribute('type', "button")
     // deleteBtn.value = "delete post"
@@ -263,12 +279,15 @@ function renderEditedPost(postData){
 }
 
 
-// function deletePost(id, section){
-//     console.log('deleting', id)
-//     const options = {
-//         method: 'DELETE',
-//     };
-//     fetch(`http://localhost:3000/posts/${id}`, options)
-//         .then(section.remove())
-//         .catch(console.warn)
-// }
+function deletePost(e){
+
+    console.log(e)
+    const id = e.target.id
+
+    const options = {
+        method: 'DELETE',
+    };
+    fetch(`http://localhost:3000/posts/${id}`, options)
+        .then(e.target.parentNode.remove())
+        .catch(console.warn)
+}
