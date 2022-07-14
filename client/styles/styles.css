@@ -83,3 +83,17 @@ body{
         height: 50px;
         overflow: hidden;
       }
+
+      /* .indexbody {
+        height: 100vh;
+      } */
+
+      footer {
+        bottom: 0;
+        position: absolute;
+      }
+
+      span {
+        display: flex;
+        justify-content: center;
+      }
