@@ -43,6 +43,7 @@ async function updateContent(){
         date.textContent = posts.date
         editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', id)
+        editBtn.setAttribute('class', "editBtn btn btn-outline-secondary mx-2")
         description.setAttribute('class', 'p-description')
         deleteBtn.textContent = "delete"
         deleteBtn.setAttribute('id', id)
@@ -154,7 +155,7 @@ async function getNewPostId(postData){
         editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', postID)
         description.setAttribute('class', 'p-description')
-        editBtn.className = "btn btn-outline-secondary"
+        editBtn.setAttribute('class', 'editBtn btn btn-outline-secondary mx-2')
         deleteBtn.textContent = "delete"
         deleteBtn.setAttribute('id', postID)
         deleteBtn.setAttribute('class', 'deleteBtn btn btn-danger btn-xs')
@@ -189,6 +190,7 @@ function editPost(){
 
     console.log("test")
     let editBtn = document.querySelector('button')
+    let deleteBtn = document.getElementsByClassName('deleteBtn')[0]
     // console.log(editBtn)
     let section = document.querySelector('section')
     let text = document.querySelector(".p-description")
@@ -212,6 +214,7 @@ function editPost(){
     section.appendChild(linebreak)
     section.appendChild(publishBtn)
     editBtn.remove()
+    deleteBtn.remove()
 
     // editBtn.textContent = id
     // console.log(editBtn)
@@ -264,7 +267,7 @@ function renderEditedPost(postData){
     editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
     editBtn.setAttribute('id', `${publishBtn.id}`)
     editBtn.addEventListener('click', editPost)
-    editBtn.className = "btn btn-outline-secondary"
+    editBtn.setAttribute('class', "editBtn btn btn-outline-secondary mx-2")
 
     let deleteBtn = document.createElement('input')
     // deleteBtn.setAttribute('type', "button")
