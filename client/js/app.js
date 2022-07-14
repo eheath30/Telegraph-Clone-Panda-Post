@@ -100,13 +100,18 @@ async function submitPost(e){
             headers: { "Content-Type": "application/json" }
         };
 
-        fetch('http://localhost:3000/posts', options)
-            .then(r => r.json())
-            .then(getNewPostId(postData))
+        // fetch('http://localhost:3000/posts', options)
+        //     .then(r => r.json())
+        //     .then(getNewPostId(postData))
             // .then(r => console.log(r))
-            .catch(console.warn)
+            // .catch(console.warn)
 
             // window.location.hash = "#post"
+
+        const response = await fetch('http://localhost:3000/posts', options)
+        // const data = await response.json()
+        // console.log(data)
+        getNewPostId(postData)
 
 
     }
@@ -126,6 +131,7 @@ function submissionError(){
 }
 
 async function getNewPostId(postData){
+    console.log(postData)
     let response = await fetch('http://localhost:3000/posts')
     let data = await response.json();
     let posts = data.posts

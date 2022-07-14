@@ -39,7 +39,7 @@ function appendResults(postData){
                 <h3 class="mb-0">${title}</h3>
                 <div class="mb-1 text-muted">${date}</div>
                 <p class="card-text mb-auto">${slicedArray}...</p>
-                <a href="https://127.0.0.1:5502/client/index.html#post/${id}" class="mb-stretched-link">Continue reading</a>
+                <a href="http://127.0.0.1:5500/telegraphClone/client/index.html#post/${id}" class="mb-stretched-link">Continue reading</a>
             </div>
             <div class="col-auto d-none d-lg-block">
                 <svg class="bd-placeholder-img" width="200" height="250"" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="44%" y="50%" fill="#eceeef" dy=".3em">🐼</text></svg>
