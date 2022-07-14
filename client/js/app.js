@@ -250,6 +250,7 @@ function renderEditedPost(postData){
     // deleteBtn.value = "delete post"
     // deleteBtn.addEventListener('click', deletePost)
     text.textContent = postData.description
+    text.setAttribute('class', 'p-description')
 
     //append to section
 
