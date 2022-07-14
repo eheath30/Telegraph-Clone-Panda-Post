@@ -42,19 +42,19 @@ Below are the routes available for use with the right usage:
 ### Files:
 
 Client:
-- app.js -
-- results.js -
-- styles.css -
-- index.html -
-- results.html -
+- app.js 
+- results.js 
+- styles.css 
+- index.html 
+- results.html 
 
 Server:
-- posts.js -
-- server.js -
-- index.js -
-- dbConfig.js -
-- controllers/posts.js -
-- models/posts.js -
+- posts.js 
+- server.js 
+- index.js 
+- dbConfig.js 
+- controllers/posts.js 
+- models/posts.js 
 
 
 ## Technologies
