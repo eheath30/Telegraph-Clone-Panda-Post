@@ -46,7 +46,7 @@ async function updateContent(){
         description.setAttribute('class', 'p-description')
         deleteBtn.textContent = "delete"
         deleteBtn.setAttribute('id', id)
-        deleteBtn.setAttribute('class', 'deleteBtn')
+        deleteBtn.setAttribute('class', 'deleteBtn btn btn-danger btn-xs')
 
 
         editBtn.addEventListener('click', editPost)
@@ -157,7 +157,7 @@ async function getNewPostId(postData){
         editBtn.className = "btn btn-outline-secondary"
         deleteBtn.textContent = "delete"
         deleteBtn.setAttribute('id', postID)
-        deleteBtn.setAttribute('class', 'deleteBtn')
+        deleteBtn.setAttribute('class', 'deleteBtn btn btn-danger btn-xs')
 
 
         //editBtn eventlistener
