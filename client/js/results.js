@@ -49,7 +49,7 @@ function appendResults(postData){
 
 function deletePost(id, section){
     console.log('deleting', id)
-    const options = { 
+    const options = {
         method: 'DELETE',
     };
     fetch(`http://localhost:3000/posts/${id}`, options)
@@ -58,7 +58,7 @@ function deletePost(id, section){
 }
 
 function editPost(){
-    const options = { 
+    const options = {
         method: 'PUT',
     };
     fetch(`http://localhost:3000/posts/${id}`, options)
@@ -69,6 +69,3 @@ function editPost(){
         })
         .catch(console.warn)
 }
-
-
-

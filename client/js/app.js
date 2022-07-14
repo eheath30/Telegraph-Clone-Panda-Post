@@ -22,7 +22,7 @@ async function updateContent(){
         let posts = data.posts
 
         console.log("posts:", posts)
-        
+
         //render post
         let body = document.querySelector('.body')
         let section = document.createElement('section')
@@ -35,12 +35,15 @@ async function updateContent(){
         console.log(body)
         // body.appendChild(section)
 
+
         title.textContent = posts.title
         alias.textContent = posts.alias
         description.textContent = posts.description
         date.textContent = posts.date
         editBtn.textContent = "edit post"
         editBtn.setAttribute('id', id)
+
+
 
         editBtn.addEventListener('click', editPost)
 
@@ -57,7 +60,7 @@ async function updateContent(){
 //bind event listeners
 form.addEventListener('submit', submitPost);
 viewBtn.addEventListener('click', () => {
-    document.location.href = "./results.html"
+    document.location.href = "./hero.html"
 })
 
 // create new post
@@ -95,7 +98,7 @@ function submitPost(e){
 
             // window.location.hash = "#post"
          getNewPostId(postData)
-         
+
     }
 };
 
@@ -109,7 +112,7 @@ function submissionError(){
         errorNote.style.color = 'red'
         errorNote.setAttribute('id', 'errornote')
         form.appendChild(errorNote)
-    } 
+    }
 }
 
 async function getNewPostId(postData){
@@ -249,19 +252,16 @@ function renderEditedPost(postData){
     section.appendChild(editBtn)
 
 
-    
+
 }
 
 
 // function deletePost(id, section){
 //     console.log('deleting', id)
-//     const options = { 
+//     const options = {
 //         method: 'DELETE',
 //     };
 //     fetch(`http://localhost:3000/posts/${id}`, options)
 //         .then(section.remove())
 //         .catch(console.warn)
 // }
-
-
-

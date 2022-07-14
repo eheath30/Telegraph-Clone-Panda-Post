@@ -48,3 +48,8 @@ body{
         display: flex;
         flex-direction: column;
       }
+
+
+      .input-description {
+        height: 100vh;
+      }
