@@ -8,8 +8,6 @@ body{
     max-width: 1200px;
   }
 
-
-    /* create styles */
     .create-post {
       display: flex; align-items: center; flex-direction: column;
     }
@@ -54,19 +52,12 @@ body{
         height: 100vh;
       }
 
-
       h1, h2, h3, p {
-
-
-        transition: transform .2s; /* Animation */
-
-        /* border: 1px solid #ccc; */
+        transition: transform .2s;
       }
 
       h1:hover, h2:hover {
         transform: scale(1.02);
-
-
       }
 
       p:hover {
@@ -83,10 +74,6 @@ body{
         height: 50px;
         overflow: hidden;
       }
-
-      /* .indexbody {
-        height: 100vh;
-      } */
 
       footer {
         bottom: 0;
