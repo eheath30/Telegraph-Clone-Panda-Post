@@ -144,6 +144,7 @@ async function getNewPostId(postData){
         date.textContent = postData.date
         editBtn.textContent = "edit post"
         editBtn.setAttribute('id', postID)
+        description.setAttribute('class', 'p-description')
 
         //editBtn eventlistener
         editBtn.addEventListener('click', editPost)
