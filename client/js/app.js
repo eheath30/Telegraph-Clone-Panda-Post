@@ -269,7 +269,6 @@ function renderEditedPost(postData){
     editBtn.addEventListener('click', editPost)
     editBtn.setAttribute('class', "editBtn btn btn-outline-secondary mx-2")
 
-    let deleteBtn = document.createElement('input')
     // deleteBtn.setAttribute('type', "button")
     // deleteBtn.value = "delete post"
     // deleteBtn.addEventListener('click', deletePost)
