@@ -40,7 +40,7 @@ async function updateContent(){
         alias.textContent = posts.alias
         description.textContent = posts.description
         date.textContent = posts.date
-        editBtn.textContent = "edit post"
+        editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', id)
         description.setAttribute('class', 'p-description')
 
@@ -142,7 +142,7 @@ async function getNewPostId(postData){
         alias.textContent = postData.alias
         description.textContent = postData.description
         date.textContent = postData.date
-        editBtn.textContent = "edit post"
+        editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', postID)
         description.setAttribute('class', 'p-description')
 

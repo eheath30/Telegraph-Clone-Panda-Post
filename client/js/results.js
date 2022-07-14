@@ -31,7 +31,7 @@ function appendResults(postData){
     alias.textContent = postData.alias;
     description.textContent = postData.description;
     deleteButton.textContent = "delete"
-    editButton.textContent = "edit"
+    editButton.innerHTML `Edit post <i class="fa-solid fa-pen-to-square"></i>`
 
     deleteButton.setAttribute('id',`${postData.id}-D`)
     deleteButton.setAttribute('id',`${postData.id}-E`)
