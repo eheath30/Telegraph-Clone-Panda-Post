@@ -145,6 +145,7 @@ async function getNewPostId(postData){
         editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
         editBtn.setAttribute('id', postID)
         description.setAttribute('class', 'p-description')
+        editBtn.className = "btn btn-outline-secondary"
 
         //editBtn eventlistener
         editBtn.addEventListener('click', editPost)
@@ -182,11 +183,13 @@ function editPost(){
     let publishBtn = document.createElement('button')
     publishBtn.setAttribute('id', `${editBtn.id}-p`)
     publishBtn.innerHTML = `publish post <i class="fa-solid fa-paper-plane"></i>`
+    publishBtn.className = "btn btn-outline-secondary"
 
     //convert text box to text box input
     text.remove()
     let textbox = document.createElement('textarea')
     textbox.value = textValue
+    textbox.className = "form-control"
     linebreak = document.createElement("br");
 
     publishBtn.addEventListener('click', publishPost)
@@ -241,10 +244,12 @@ function renderEditedPost(postData){
     textarea.remove()
     let text = document.createElement('p')
 
+
     let editBtn = document.createElement('button')
     editBtn.innerHTML = `Edit post <i class="fa-solid fa-pen-to-square"></i>`
     editBtn.setAttribute('id', `${publishBtn.id}`)
     editBtn.addEventListener('click', editPost)
+    editBtn.className = "btn btn-outline-secondary"
     let deleteBtn = document.createElement('input')
     // deleteBtn.setAttribute('type', "button")
     // deleteBtn.value = "delete post"
